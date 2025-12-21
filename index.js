@@ -281,7 +281,3 @@ app.post('/api/speak', async (req, res) => {
 sequelize.sync().then(() => {
   app.listen(5000, () => console.log('Server running on port 5000'));
 });
-
-sequelize.sync().then(() => {
-  app.listen(5000, () => console.log('Server running on port 5000'));
-});
