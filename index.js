@@ -16,7 +16,7 @@ require('dotenv').config();
 const app = express();
 const upload = multer({ dest: 'uploads/', limits: { fileSize: 50 * 1024 * 1024 } });
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const JWT_SECRET = process.env.JWT_SECRET || "super_secret_key_change_me";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 app.use(cors({ exposedHeaders: ['X-Request-ID'] }));
 app.use(express.json());
