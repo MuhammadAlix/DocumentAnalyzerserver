@@ -13,11 +13,13 @@
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "adm-zip": "^0.5.16",
+    "bcryptjs": "^3.0.3",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "exceljs": "^4.4.0",
     "express": "^5.2.1",
     "google-tts-api": "^0.0.6",
+    "jsonwebtoken": "^9.0.3",
     "mammoth": "^1.11.0",
     "multer": "^2.0.2",
     "pdf-parse": "^2.4.5",
