@@ -41,26 +41,25 @@ A powerful, pure Node.js backend for analyzing documents, images, and video usin
 ### 1. Clone & Install
 
 ```bash
-git clone <your-repo-url>
-cd <your-repo-folder>
-# Install dependencies including the specific PDF.js version for Node support
+git clone https://github.com/MuhammadAlix/DocumentAnalyzerserver.git
+cd DocumentAnalyzerserver
 npm install
 ```
 
 
 ### 2. Database & Vector Store Setup
 
-    **PostgreSQL:** Create a database (e.g., ai_docs_db).
+**PostgreSQL:** Create a database (e.g., ai_docs_db).
 
-    **Pinecone:**
+**Pinecone:**
 
-        * Go to the [Pinecone Console](https://app.pinecone.io/organizations/-OhYfPmEVLetRsljpFle/projects/e4ce0c5b-3861-4b75-9bca-22f5fcd220ad/indexes).
+* Go to the [Pinecone Console](https://app.pinecone.io/organizations/-OhYfPmEVLetRsljpFle/projects/e4ce0c5b-3861-4b75-9bca-22f5fcd220ad/indexes).
 
-        * Create an index named `ai-docs-index`.
+* Create an index named `ai-docs-index`.
 
-        * Dimensions: `768`.
+* Dimensions: `768`.
 
-        * Metric: `Cosine`.
+* Metric: `Cosine`.
 
 ### 3. Environment Configuration
 
@@ -87,20 +86,20 @@ This project uses Piper for offline neural text-to-speech. You must download the
 
 ### Step 1: Download the Binary
 
-    1. Go to the [Piper GitHub Releases](https://github.com/rhasspy/piper/releases).
+1. Go to the [Piper GitHub Releases](https://github.com/rhasspy/piper/releases).
 
-    2. Download the archive for your architecture (`usually piper_linux_x86_64.tar.gz`).
+2. Download the archive for your architecture (`usually piper_linux_x86_64.tar.gz`).
 
-    3. Extract the contents into the `server/piper/` directory.
+3. Extract the contents into the `server/piper/` directory.
 
 
 ### Step 2: Download Voice Models
 
-    1. Visit the [Hugging Face Piper Voices](https://huggingface.co/rhasspy/piper-voices/tree/main/en/en_US).
+1. Visit the [Hugging Face Piper Voices](https://huggingface.co/rhasspy/piper-voices/tree/main/en/en_US).
 
-    2. Download the `.onnx` and `.onnx.json` files for your desired voice (e.g., `en_US-lessac-medium`).
+2. Download the `.onnx` and `.onnx.json` files for your desired voice (e.g., `en_US-lessac-medium`).
 
-    3. Place them inside `server/piper/`
+3. Place them inside `server/piper/`
 
 
 ### Required Structure:
@@ -123,7 +122,7 @@ node index.js
 ```
 The server will start on `http://localhost:5000.`
 
-📡 API Endpoints Overview
+## 📡 API Endpoints Overview
 
 | Method | Endpoint         | Description                                                                                               |
 |--------|------------------|-----------------------------------------------------------------------------------------------------------|
