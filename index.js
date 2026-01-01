@@ -26,14 +26,21 @@ const audioCache = new Map();
 
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
+  const token = authHeader && authHeader.split(' ')[1]; // Extract "Bearer <token>"
 
-  if (!token) return res.sendStatus(401);
+  if (!token) {
+      console.log("❌ Blocked request: No token provided");
+      return res.status(401).json({ error: "Access Denied: No Token" }); // STOP EXECUTION
+  }
 
-  jwt.verify(token, JWT_SECRET, (err, user) => {
-    if (err) return res.sendStatus(403);
-    req.user = user;
-    next();
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) {
+        console.log("❌ Blocked request: Invalid Token");
+        return res.status(403).json({ error: "Access Denied: Invalid Token" }); // STOP EXECUTION
+    }
+    
+    req.user = user; // Attach user to request
+    next(); // ONLY call next if successful
   });
 };
 
@@ -222,7 +229,7 @@ app.post('/api/analyze', authenticateToken, upload.single('file'), async (req, r
         context: textForAnalysis 
     });
     res.setHeader('X-Chat-ID', newChat.id);
-    await storeDocument(newChat.id, textForAnalysis);
+    await storeDocument(newChat.id, req.user.id ,textForAnalysis);
     const promptParts = [`Analyze this content and provide a comprehensive summary:\n\n${textForAnalysis}`];
     const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
     const result = await model.generateContentStream(promptParts);
@@ -266,7 +273,7 @@ app.post('/api/chat', authenticateToken, async (req, res) => {
     let retrievedContext = "";
     if (chatId) {
       console.log(`🔍 Searching vector context for chat: ${chatId}`);
-      retrievedContext = await getContext(chatId, message);
+      retrievedContext = await getContext(chatId, req.user.id, message);
     }
 
     let systemInstruction = "";
